@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  background-color: #000000;
+  color: #E7E9EA;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
