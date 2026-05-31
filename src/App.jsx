@@ -19,7 +19,7 @@ const SnippetLogo = () => (
 );
 
 const LocationIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-brandMuted">
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
     <path d="M5.9975 6.71497C6.85906 6.71497 7.5575 6.01654 7.5575 5.15497C7.5575 4.29341 6.85906 3.59497 5.9975 3.59497C5.13594 3.59497 4.4375 4.29341 4.4375 5.15497C4.4375 6.01654 5.13594 6.71497 5.9975 6.71497Z" stroke="currentColor" />
     <path d="M1.80888 4.245C2.79388 -0.0849988 9.20888 -0.0799987 10.1889 4.25C10.7639 6.79 9.18388 8.94 7.79888 10.27C6.79388 11.24 5.20388 11.24 4.19388 10.27C2.81388 8.94 1.23388 6.785 1.80888 4.245Z" stroke="currentColor" />
   </svg>
@@ -231,7 +231,7 @@ function App() {
     <div className="flex-1 bg-black min-h-screen text-brandText flex flex-col justify-start items-center p-0 md:py-6">
 
       {/* Container simulating high fidelity mobile app layout on desktop */}
-      <div className="w-full max-w-md bg-black min-h-screen md:min-h-[850px] md:max-h-[920px] md:rounded-[40px] md:border-[10px] md:border-zinc-900 md:shadow-[0_0_50px_rgba(255,255,255,0.03)] flex flex-col relative overflow-y-auto overflow-x-hidden scrollbar-thin">
+      <div className="w-full max-w-md bg-black min-h-screen md:min-h-[850px] md:max-h-[920px] md:rounded-[38px] md:border-[10px] md:border-zinc-900 md:shadow-[0_0_50px_rgba(255,255,255,0.03)] flex flex-col relative overflow-y-auto overflow-x-hidden scrollbar-thin">
 
         {/* Mobile Status Bar simulation on desktop */}
         <div className="hidden md:flex justify-between items-center px-6 py-2.5 text-[11px] font-medium text-zinc-500 bg-black select-none border-b border-zinc-950">
@@ -242,10 +242,13 @@ function App() {
           </div>
         </div>
 
+        {/* Top divider line above navbar */}
+        <div className="h-px w-full bg-[#262626]" />
+
         {/* 1. Header (Navbar) */}
-        <header className="flex justify-between items-center px-4 py-4 sticky top-0 bg-black/90 backdrop-blur-md z-30 select-none">
+        <header className="flex justify-between items-center px-4 pt-2.5 pb-[0.6rem] sticky top-0 bg-black/95 backdrop-blur-md z-30 select-none border-b border-[#262626]">
           <div className="flex items-center gap-3">
-            <button className="p-1 hover:bg-zinc-900 rounded-lg transition-colors">
+            <button className="p-1 hover:bg-zinc-900 rounded-md transition-colors">
               <MenuIcon />
             </button>
             <div className="cursor-pointer transition-transform hover:scale-105 active:scale-95">
@@ -260,15 +263,15 @@ function App() {
                 setNewDayOfWeek(activeTab === 'your' ? 'Tuesday' : 'Wednesday');
                 setIsCreateOpen(true);
               }}
-              className="px-3.5 py-1.5 rounded-full border border-brandBorder text-xs font-semibold text-brandText bg-black hover:border-brandPink hover:text-brandPink hover:shadow-[0_0_12px_rgba(240,108,183,0.15)] transition-all duration-200"
+              className="px-3.5 py-1.5 rounded-full border border-zinc-800 text-xs font-semibold text-[#E7E9EA] bg-[#0A0A0C] hover:border-brandPink hover:text-brandPink hover:shadow-[0_0_12px_rgba(240,108,183,0.12)] transition-all duration-200"
             >
               create event
             </button>
             <button
               onClick={() => setIsFilterOpen(true)}
-              className={`px-3.5 py-1.5 rounded-full border text-xs font-semibold bg-black transition-all duration-200 ${categoryFilter !== 'All' || entryFilter !== 'All'
+              className={`px-3.5 py-1.5 rounded-full border text-xs font-semibold bg-[#0A0A0C] transition-all duration-200 ${categoryFilter !== 'All' || entryFilter !== 'All'
                 ? 'border-brandPink text-brandPink shadow-[0_0_10px_rgba(240,108,183,0.1)]'
-                : 'border-brandBorder text-brandText hover:border-white'
+                : 'border-zinc-800 text-[#E7E9EA] hover:border-zinc-500'
                 }`}
             >
               filter
@@ -277,21 +280,21 @@ function App() {
         </header>
 
         {/* 2. Interactive Navigation Tabs */}
-        <nav className="flex border-b border-zinc-900 relative z-20 select-none">
+        <nav className="flex border-b border-[#262626] relative z-20 select-none">
           <button
             onClick={() => {
               setActiveTab('your');
               setCategoryFilter('All');
               setEntryFilter('All');
             }}
-            className="flex-1 py-3 text-center text-sm font-semibold transition-all duration-200 relative"
+            className="flex-1 py-3 text-center text-[14px] font-semibold transition-all duration-200 relative"
           >
-            <span className={activeTab === 'your' ? 'text-brandText font-bold' : 'text-[#5C6168] hover:text-zinc-400'}>
+            <span className={activeTab === 'your' ? 'text-brandText font-bold relative inline-block' : 'text-[#5C6168] hover:text-zinc-400 relative inline-block'}>
               your hoods
+              {activeTab === 'your' && (
+                <span className="absolute -bottom-3 left-1/2 w-[100px] h-px -translate-x-1/2 bg-white rounded-[30px] transition-transform duration-300"></span>
+              )}
             </span>
-            {activeTab === 'your' && (
-              <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-t-full transition-transform duration-300"></span>
-            )}
           </button>
           <button
             onClick={() => {
@@ -299,14 +302,14 @@ function App() {
               setCategoryFilter('All');
               setEntryFilter('All');
             }}
-            className="flex-1 py-3 text-center text-sm font-semibold transition-all duration-200 relative"
+            className="flex-1 py-3 text-center text-[14px] font-semibold transition-all duration-200 relative"
           >
-            <span className={activeTab === 'other' ? 'text-brandText font-bold' : 'text-[#5C6168] hover:text-zinc-400'}>
+            <span className={activeTab === 'other' ? 'text-brandText font-bold relative inline-block' : 'text-[#5C6168] hover:text-zinc-400 relative inline-block'}>
               other hoods
+              {activeTab === 'other' && (
+                <span className="absolute -bottom-3 left-1/2 w-[100px] h-px -translate-x-1/2 bg-white rounded-[30px] transition-transform duration-300"></span>
+              )}
             </span>
-            {activeTab === 'other' && (
-              <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-t-full transition-transform duration-300"></span>
-            )}
           </button>
         </nav>
 
@@ -332,7 +335,7 @@ function App() {
         )}
 
         {/* 3. Event List Section with Timeline */}
-        <main className="flex-1 px-4 py-6 relative select-none">
+        <main className="flex-1 px-4 py-5 relative select-none">
 
           {filteredEvents.length === 0 ? (
             <div className="py-24 text-center flex flex-col items-center justify-center animate-fadeIn">
@@ -343,26 +346,26 @@ function App() {
               <p className="text-zinc-600 text-xs px-12">Try clearing your active filters or create a new event in this hood!</p>
             </div>
           ) : (
-            <div className="relative pl-7 flex flex-col gap-8">
+            <div className="relative pl-[30px] flex flex-col gap-3">
 
               {/* Central Vertical Dashed Timeline Track */}
-              <div className="absolute left-[15px] top-3 bottom-3 w-0 border-l border-dashed border-zinc-800 z-0"></div>
+              <div className="absolute left-[13px] top-3 bottom-3 w-0 border-l-[3px] border-dashed border-[#262626] z-0 dash-track"></div>
 
               {/* Day Section: Today */}
               {groupedEvents.Today && groupedEvents.Today.length > 0 && (
                 <section className="relative flex flex-col gap-4 animate-slideUp">
 
                   {/* Timeline circular node for Today */}
-                  <div className="absolute left-[-21px] top-1 w-2.5 h-2.5 rounded-full bg-white border border-black z-10 shadow-[0_0_8px_rgba(255,255,255,0.4)]"></div>
+                  <div className="absolute left-[-18.5px] top-1 w-[7px] h-[7px] rounded-full bg-white border border-black z-10 shadow-[0_0_8px_rgba(255,255,255,0.4)]"></div>
 
                   {/* Section Title Header */}
                   <div className="flex items-baseline gap-2 mb-1">
-                    <h2 className="text-brandText text-sm font-bold tracking-wide">Today</h2>
-                    <span className="text-brandMuted text-xs font-normal">Tuesday</span>
+                    <h2 className="text-brandText text-[12px] font-semibold leading-[15px] font-['Inter']">Today</h2>
+                    <span className="text-[#676767] text-[12px] font-semibold leading-[15px] font-['Inter']">Tuesday</span>
                   </div>
 
                   {/* Cards container */}
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-3.5">
                     {groupedEvents.Today.map((event) => (
                       <EventCard
                         key={event.id}
@@ -379,16 +382,16 @@ function App() {
                 <section className="relative flex flex-col gap-4 animate-slideUp">
 
                   {/* Timeline circular node for Tomorrow */}
-                  <div className="absolute left-[-21px] top-1 w-2.5 h-2.5 rounded-full bg-white border border-black z-10 shadow-[0_0_8px_rgba(255,255,255,0.4)]"></div>
+                  <div className="absolute left-[-18.5px] top-1 w-[7px] h-[7px] rounded-full bg-white border border-black z-10 shadow-[0_0_8px_rgba(255,255,255,0.4)]"></div>
 
                   {/* Section Title Header */}
                   <div className="flex items-baseline gap-2 mb-1">
-                    <h2 className="text-brandText text-sm font-bold tracking-wide">Tomorrow</h2>
-                    <span className="text-brandMuted text-xs font-normal">Wednesday</span>
+                    <h2 className="text-brandText text-[12px] font-semibold leading-[15px] font-['Inter']">Tomorrow</h2>
+                    <span className="text-[#676767] text-[12px] font-semibold leading-[15px] font-['Inter']">Wednesday</span>
                   </div>
 
                   {/* Cards container */}
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-3.5">
                     {groupedEvents.Tomorrow.map((event) => (
                       <EventCard
                         key={event.id}
@@ -724,22 +727,22 @@ function EventCard({ event, onClick }) {
   return (
     <div
       onClick={onClick}
-      className="bg-brandCard border border-brandBorder rounded-[20px] p-4 flex justify-between items-start gap-4 hover:border-zinc-800 hover:bg-zinc-950/60 hover:shadow-[0_4px_20px_rgba(0,0,0,0.5)] active:scale-[0.99] transition-all duration-300 cursor-pointer group relative overflow-hidden"
+      className="bg-black border border-[#2F3336] rounded-[10px] border w-[319px] h-[149px] p-3.5 flex justify-between items-start gap-3 hover:border-zinc-800 hover:bg-zinc-950/60 hover:shadow-[0_4px_20px_rgba(0,0,0,0.5)] active:scale-[0.99] transition-all duration-300 cursor-pointer group relative overflow-hidden"
     >
       {/* Event Details (Left side) */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col pr-1.5">
         {/* Time */}
-        <span className="text-brandMuted text-[10px] font-medium mb-1 tracking-wider uppercase">
+        <span className="text-[#616161] text-[10px] font-medium leading-[12px] mb-[6px]">
           {event.time}
         </span>
 
         {/* Title */}
-        <h3 className="text-brandText text-sm font-bold leading-snug group-hover:text-white transition-colors tracking-wide mb-1.5">
+        <h3 className="text-brandText text-[15px] font-semibold leading-[18px] font-['Inter'] group-hover:text-white transition-colors mb-1.5 w-[190px] h-[18px]">
           {event.title}
         </h3>
 
         {/* Location Pin & text */}
-        <div className="flex items-center gap-1 text-brandMuted text-[11px] font-normal mb-3">
+        <div className="flex items-center gap-1 text-white text-[12px] font-normal leading-[15px] font-['Inter'] mb-3">
           <LocationIcon />
           <span className="group-hover:text-zinc-300 transition-colors truncate max-w-[190px]">
             {event.location}
@@ -747,28 +750,30 @@ function EventCard({ event, onClick }) {
         </div>
 
         {/* Badges Container */}
-        <div className="flex flex-wrap items-center gap-1.5 select-none">
+        <div className="flex flex-col gap-1.5 select-none">
           {/* Main Category Badge (Solid white with black text and tag icon) */}
-          <span className="inline-flex items-center gap-1 bg-white text-black text-[10px] font-bold px-2 py-0.5 rounded-[5px] shadow-sm">
+          <span className="inline-flex items-center justify-center gap-1 bg-white text-black text-[12px] font-semibold leading-[15px] font-['Inter'] text-center px-2.5 py-0.5 rounded-[7px] shadow-sm h-[24px] w-[83px]">
             <TagIcon />
             {event.category}
           </span>
 
           {/* Sub Badges */}
-          {event.badges.map((badge, idx) => (
-            <span
-              key={idx}
-              className="inline-flex items-center gap-1 bg-black border border-brandBorder text-brandText text-[10px] font-normal px-2 py-0.5 rounded-[5px] group-hover:border-zinc-800 transition-colors"
-            >
-              <span>{badge.emoji}</span>
-              <span>{badge.text}</span>
-            </span>
-          ))}
+          <div className="flex items-center gap-1.5 flex-nowrap whitespace-nowrap max-w-[190px]">
+            {event.badges.map((badge, idx) => (
+              <span
+                key={idx}
+                className="inline-flex items-center gap-1 bg-black border border-[#2F3336] text-brandText text-[12px] font-normal leading-[15px] font-['Inter'] px-2 py-0.5 rounded-[7px] group-hover:border-zinc-800 transition-colors whitespace-nowrap h-[24px]"
+              >
+                <span>{badge.emoji}</span>
+                <span>{badge.text}</span>
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Event Thumbnail (Right side) */}
-      <div className="w-[82px] h-[82px] rounded-[15px] overflow-hidden flex-shrink-0 border border-brandBorder relative group-hover:border-zinc-800 transition-colors">
+      <div className="w-[78px] h-[78px] rounded-[7px] overflow-hidden flex-shrink-0 border border-[#2F3336] relative group-hover:border-zinc-800 transition-colors">
         <img
           src={event.image}
           alt={event.title}

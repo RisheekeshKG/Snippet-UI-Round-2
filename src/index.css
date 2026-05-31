@@ -10,3 +10,13 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.dash-track {
+  border-image: repeating-linear-gradient(
+    to bottom,
+    #262626 0,
+    #262626 4px,
+    transparent 4px,
+    transparent 8px
+  ) 1;
+}
